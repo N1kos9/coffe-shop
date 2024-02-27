@@ -1,14 +1,14 @@
-import React from "react";
+import Layout from "./components/Layout";
 
-const Hero: React.FC = () => {
+export default function Home() {
   return (
-    <div className="text-center py-16 bg-cover bg-hero-pattern">
-      <h2 className="text-4xl font-bold text-white mb-2">
-        Welcome to Our Coffee Shop
-      </h2>
-      <p className="text-white">The best coffee in town.</p>
-    </div>
+    <Layout>
+      <div className="text-center p-20">
+        <h1 className="text-5xl font-bold">Welcome to Our Coffee Shop</h1>
+        <p className="mt-4 text-gray-800">
+          Discover your favorite coffee with us
+        </p>
+      </div>
+    </Layout>
   );
-};
-
-export default Hero;
+}
