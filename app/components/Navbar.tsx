@@ -1,7 +1,7 @@
 // components/Navbar.js
 
 import Link from "next/link";
-
+import { Button } from "@/components/ui/button";
 export default function Navbar() {
   return (
     <nav className="flex justify-between items-center p-4 bg-black text-white">
@@ -11,7 +11,7 @@ export default function Navbar() {
           Home
         </Link>
         <Link href="/menu" className="px-4 hover:text-gray-300">
-          Menu
+          <Button>Menu</Button>
         </Link>
         <Link href="/about" className="px-4 hover:text-gray-300">
           About Us
