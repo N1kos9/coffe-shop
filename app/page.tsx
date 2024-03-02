@@ -2,10 +2,40 @@
 
 import Layout from "./components/Layout";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Home() {
-  const fadeIn = {
-    offscreen: { y: 20, opacity: 0 },
+  const [coffeePreference, setCoffeePreference] = useState("");
+
+  const coffeeDetails = {
+    Espresso: {
+      emoji: "☕",
+      message: "Strong and straightforward, just like your choices.",
+    },
+    Latte: {
+      emoji: "🥛",
+      message: "Smooth and creamy, for a gentle start to your day.",
+    },
+    Cappuccino: {
+      emoji: "🍂",
+      message: "Perfectly balanced, as all things should be.",
+    },
+    Americano: {
+      emoji: "💧",
+      message: "Simplicity is the ultimate sophistication.",
+    },
+    FlatWhite: {
+      emoji: "🤍",
+      message: "Smooth, rich, and velvety, for the refined palate.",
+    },
+    Mocha: {
+      emoji: "🍫",
+      message: "For those who enjoy the sweeter things in life.",
+    },
+  };
+
+  const fadeInUp = {
+    offscreen: { y: 30, opacity: 0 },
     onscreen: {
       y: 0,
       opacity: 1,
@@ -13,124 +43,93 @@ export default function Home() {
     },
   };
 
-  const hoverAnimation = {
-    hover: { scale: 1.05, transition: { duration: 0.3 } },
-    tap: { scale: 0.95, transition: { duration: 0.3 } },
+  const handleCoffeeSelection = (coffee) => {
+    setCoffeePreference(coffee);
   };
 
   return (
     <Layout>
-      <div className="flex flex-col items-center justify-center space-y-10 min-h-screen">
+      <div className="flex flex-col items-center justify-center space-y-12 min-h-screen  px-5">
         <motion.div
-          className="text-center"
+          className="text-center space-y-5"
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ once: true }}
-          variants={fadeIn}
+          variants={fadeInUp}
         >
-          <motion.h1
-            className="text-5xl font-bold"
-            variants={hoverAnimation}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            Explore the Art of Coffee
-          </motion.h1>
-          <motion.p
-            className="mt-4 text-xl"
-            variants={hoverAnimation}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            A journey through flavors and aromas
-          </motion.p>
+          <h1 className="text-5xl font-bold">Explore the Art of Coffee</h1>
+          <p className="text-xl">A journey through flavors and aromas</p>
         </motion.div>
 
-        <motion.section
-          className="max-w-4xl text-center p-10"
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true }}
-          variants={fadeIn}
-        >
-          <motion.h2
-            className="text-3xl font-bold"
-            variants={hoverAnimation}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            Our Philosophy
-          </motion.h2>
-          <motion.p variants={hoverAnimation} whileHover="hover" whileTap="tap">
-            We believe in simplicity and elegance, both in our coffee and our
-            design. Every cup is a masterpiece, crafted with passion and
-            precision.
-          </motion.p>
-        </motion.section>
-
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-5"
+          className="w-full max-w-4xl"
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ once: true }}
-          variants={fadeIn}
+          variants={fadeInUp}
         >
-          {[
-            "Espresso",
-            "Latte",
-            "Cappuccino",
-            "Americano",
-            "Flat White",
-            "Mocha",
-          ].map((coffee, index) => (
+          <h2 className="text-3xl font-bold text-center mb-4">
+            What's Your Coffee?
+          </h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {Object.keys(coffeeDetails).map((coffee, index) => (
+              <motion.button
+                key={index}
+                className="px-4 py-2 border border-gray-700 rounded-full hover:bg-gray-800 hover:text-white transition-all"
+                onClick={() => handleCoffeeSelection(coffee)}
+              >
+                {coffee}
+              </motion.button>
+            ))}
+          </div>
+          {coffeePreference && (
             <motion.div
-              key={index}
-              className="p-5 border border-gray-800 hover:border-gray-500 transition-all cursor-pointer"
-              variants={hoverAnimation}
-              whileHover="hover"
-              whileTap="tap"
+              className="text-center mt-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
             >
-              <h3 className="text-2xl font-bold">{coffee}</h3>
-              <p>
-                Delve into the essence of coffee with our {coffee.toLowerCase()}
-                .
+              <p className="text-2xl">
+                {coffeeDetails[coffeePreference].emoji}{" "}
+                <span className="font-bold">{coffeePreference}</span>
               </p>
+              <p className="mt-4">{coffeeDetails[coffeePreference].message}</p>
             </motion.div>
-          ))}
+          )}
         </motion.div>
 
+        {/* Philosophy Section */}
         <motion.div
-          className="text-center py-20"
+          className="w-full border-t border-b border-gray-700 py-12"
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ once: true }}
-          variants={fadeIn}
+          variants={fadeInUp}
         >
-          <motion.h2
-            className="text-4xl font-bold"
-            variants={hoverAnimation}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            Join the Movement
-          </motion.h2>
-          <motion.p
-            className="mt-4"
-            variants={hoverAnimation}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            Be part of our community. Discover more, enjoy member-exclusive
-            offers, and celebrate the culture of coffee.
-          </motion.p>
-          <motion.button
-            className="mt-5 px-6 py-3 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition duration-300"
-            variants={hoverAnimation}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            Learn More
-          </motion.button>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center">Our Philosophy</h2>
+            <p className="mt-4 text-xl text-center">
+              Simplicity and elegance, both in our coffee and our design. Every
+              cup is a masterpiece.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="w-full py-12"
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+        >
+          <div className="text-center">
+            <h2 className="text-4xl font-bold">Join Us</h2>
+            <p className="mt-4 text-xl">
+              Be part of our community and celebrate the culture of coffee.
+            </p>
+            <button className="mt-6 px-6 py-3 rounded-full bg-black text-white hover:bg-gray-700 transition-all">
+              Learn More
+            </button>
+          </div>
         </motion.div>
       </div>
     </Layout>
