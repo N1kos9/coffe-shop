@@ -21,7 +21,7 @@ export default function Menu() {
 
   return (
     <Layout>
-      <div className="p-10">
+      <div className="px-5 py-10 md:p-10">
         <motion.h2
           className="text-3xl font-bold text-center"
           initial={{ scale: 0.8, opacity: 0 }}
@@ -31,14 +31,14 @@ export default function Menu() {
           Our Menu
         </motion.h2>
         <motion.div
-          className="mt-6 flex flex-col items-center"
+          className="mt-6 flex flex-col items-center md:items-stretch"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {/* Featured Drink */}
           <motion.div
-            className="my-8 p-4 rounded-lg shadow-lg bg-gray-800 text-white w-full max-w-md text-center"
+            className="my-8 p-4 rounded-lg shadow-lg bg-gray-800 text-white w-full max-w-lg mx-auto text-center"
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -47,48 +47,66 @@ export default function Menu() {
             <p>Seasonal Pumpkin Spice Latte - $6</p>
           </motion.div>
           <motion.h4
-            className="self-start w-full max-w-md text-xl font-semibold mt-10 mb-4"
+            className="text-xl font-semibold mt-10 mb-4 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
           >
             Coffee
           </motion.h4>
-          <motion.p variants={itemVariants} className="my-2">
-            Espresso - $3
-          </motion.p>
-          <motion.p variants={itemVariants} className="my-2">
-            Americano - $4
-          </motion.p>
-          <motion.p variants={itemVariants} className="my-2">
-            Cappuccino - $4.5
-          </motion.p>
-          <motion.p variants={itemVariants} className="my-2">
-            Latte - $4.5
-          </motion.p>
-          <motion.p variants={itemVariants} className="my-2">
-            Mocha - $5
-          </motion.p>
+          {/* Dynamic alignment for responsiveness */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg mx-auto">
+            {/* Each item as a motion component for animation */}
+            {[
+              "Espresso - $3",
+              "Americano - $4",
+              "Cappuccino - $4.5",
+              "Latte - $4.5",
+              "Mocha - $5",
+            ].map((item, index) => (
+              <motion.p
+                key={index}
+                variants={itemVariants}
+                className="my-2 text-center"
+              >
+                {item}
+              </motion.p>
+            ))}
+          </div>
           <motion.h4
-            className="self-start w-full max-w-md text-xl font-semibold mt-10 mb-4"
+            className="text-xl font-semibold mt-10 mb-4 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
           >
             Teas & Others
           </motion.h4>
-          <motion.p variants={itemVariants} className="my-2">
-            Green Tea - $3
-          </motion.p>
-          <motion.p variants={itemVariants} className="my-2">
-            Black Tea - $3
-          </motion.p>
-          <motion.p variants={itemVariants} className="my-2">
-            Herbal Tea - $3.5
-          </motion.p>
-          <motion.p variants={itemVariants} className="my-2">
-            Hot Chocolate - $4
-          </motion.p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg mx-auto">
+            {[
+              "Green Tea - $3",
+              "Black Tea - $3",
+              "Herbal Tea - $3.5",
+              "Hot Chocolate - $4",
+            ].map((item, index) => (
+              <motion.p
+                key={index}
+                variants={itemVariants}
+                className="my-2 text-center"
+              >
+                {item}
+              </motion.p>
+            ))}
+          </div>
+          {/* Additional content and alignment for mobile-friendliness */}
+          <motion.div
+            className="my-8 p-4 rounded-lg shadow-lg bg-gray-900 text-white w-full max-w-lg mx-auto text-center"
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1.1 }}
+          >
+            <h3 className="text-xl font-bold mb-2">Special Offer</h3>
+            <p>Buy any coffee and get 50% off any pastry!</p>
+          </motion.div>
         </motion.div>
       </div>
     </Layout>
