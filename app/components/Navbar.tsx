@@ -20,7 +20,6 @@ export default function Navbar() {
     { label: "FAQ", path: "/faq" },
   ];
 
-  // Variants for the mobile menu animation
   const menuVariants = {
     hidden: {
       opacity: 0,
@@ -38,7 +37,6 @@ export default function Navbar() {
     },
   };
 
-  // Variants for the link hover effect
   const linkVariants = {
     hover: {
       scale: 1.1,
@@ -56,7 +54,6 @@ export default function Navbar() {
           className="md:hidden p-4 text-xl mt-4 border rounded-lg"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          {/* Replace with an appropriate icon */}
           <span>{isMobileMenuOpen ? "Close" : "Menu"}</span>
         </button>
         {/* Always visible on desktop */}
@@ -65,7 +62,6 @@ export default function Navbar() {
             <motion.a
               key={link.path}
               href={link.path}
-              passHref
               whileHover="hover"
               variants={linkVariants}
               className={`cursor-pointer block text-center md:inline-block px-4 py-2 rounded-md font-medium ${
@@ -81,7 +77,6 @@ export default function Navbar() {
             <ModeToggle />
           </div>
         </div>
-        {/* Mobile Menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
