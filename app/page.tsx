@@ -4,35 +4,45 @@ import Layout from "./components/Layout";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export default function Home() {
-  const [coffeePreference, setCoffeePreference] = useState("");
+interface CoffeeDetail {
+  emoji: string;
+  message: string;
+}
 
-  const coffeeDetails = {
-    Espresso: {
-      emoji: "☕",
-      message: "Strong and straightforward, just like your choices.",
-    },
-    Latte: {
-      emoji: "🥛",
-      message: "Smooth and creamy, for a gentle start to your day.",
-    },
-    Cappuccino: {
-      emoji: "🍂",
-      message: "Perfectly balanced, as all things should be.",
-    },
-    Americano: {
-      emoji: "💧",
-      message: "Simplicity is the ultimate sophistication.",
-    },
-    FlatWhite: {
-      emoji: "🤍",
-      message: "Smooth, rich, and velvety, for the refined palate.",
-    },
-    Mocha: {
-      emoji: "🍫",
-      message: "For those who enjoy the sweeter things in life.",
-    },
-  };
+// Define the type for the coffeeDetails object
+interface CoffeeDetails {
+  [key: string]: CoffeeDetail;
+}
+
+const coffeeDetails: CoffeeDetails = {
+  Espresso: {
+    emoji: "☕",
+    message: "Strong and straightforward, just like your choices.",
+  },
+  Latte: {
+    emoji: "🥛",
+    message: "Smooth and creamy, for a gentle start to your day.",
+  },
+  Cappuccino: {
+    emoji: "🍂",
+    message: "Perfectly balanced, as all things should be.",
+  },
+  Americano: {
+    emoji: "💧",
+    message: "Simplicity is the ultimate sophistication.",
+  },
+  FlatWhite: {
+    emoji: "🤍",
+    message: "Smooth, rich, and velvety, for the refined palate.",
+  },
+  Mocha: {
+    emoji: "🍫",
+    message: "For those who enjoy the sweeter things in life.",
+  },
+};
+
+export default function Home() {
+  const [coffeePreference, setCoffeePreference] = useState<string>("");
 
   const fadeInUp = {
     offscreen: { y: 30, opacity: 0 },
@@ -43,7 +53,7 @@ export default function Home() {
     },
   };
 
-  const handleCoffeeSelection = (coffee) => {
+  const handleCoffeeSelection = (coffee: string) => {
     setCoffeePreference(coffee);
   };
 
